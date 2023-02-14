@@ -18,10 +18,10 @@ export const Home = () => {
 		>
 			<h2>CHARACTERS</h2>
 			<div className="cardParent">
-				{store.characters.map((char, idx) => {
+				{store.characters.map((item, idx) => {
 				return (
 					<div className="cardMapDiv" key={idx}>
-						<Card character={char} id={idx}/>
+						<Card item={item} id={idx} type="character"/>
 					</div>
 				);
 				})}
@@ -29,10 +29,10 @@ export const Home = () => {
 			
 			<h2 className="planetsHeading">PLANETS</h2>
 			<div className="cardParent">
-				{store.planets.map((planet, idx) => {
+				{store.planets.map((item, idx) => {
 					return (
 					<div className="cardMapDiv" key={idx}>
-						<Card planet={planet} id={idx}/>
+						<Card item={item} id={idx} type="planet"/>
 					</div>
 				);
 				})}
@@ -40,10 +40,10 @@ export const Home = () => {
 
 			<h2 className="planetsHeading">STARSHIPS</h2>
 			<div className="cardParent">
-				{store.starships.map((starship, idx) => {
+				{store.starships.map((item, idx) => {
 					return (
 					<div className="cardMapDiv" key={idx}>
-						<Card starship={starship} id={idx}/>
+						<Card item={item} id={idx} type="starship" />
 					</div>
 				);
 				})}

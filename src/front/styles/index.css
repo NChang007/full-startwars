@@ -2,17 +2,39 @@
 .planetsHeading {
     border-top: 1px solid black;
 }
-  
 .cardParent {
-width: 80%;
-/* height: 300px; */
-padding: 30px;
-overflow-x: scroll; /*must have*/
-background: #f5f5f5;
-white-space: nowrap; /*must have*/
+    width: 80%;
+    /* height: 300px; */
+    padding: 30px;
+    overflow-x: scroll; /*must have*/
+    background: #f5f5f5;
+    white-space: nowrap; /*must have*/
 }
-
 .cardMapDiv {
-box-sizing: border-box; /*must have*/
-display: inline-block;
+    box-sizing: border-box; /*must have*/
+    display: inline-block;
+}
+/* About page ---------------------------------------------------------------------------------------------- */
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3rem;
+}
+.aboutImage {
+    margin: 3rem 0rem 3rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.aboutImage img {
+    margin: 2rem;
+}
+.aboutDetails{
+    display: flex;
+    border-top: 2px solid rgb(172, 38, 172);
+}
+.aboutDetails h4{
+    margin: 1rem;
 }

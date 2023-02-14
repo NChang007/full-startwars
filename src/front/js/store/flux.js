@@ -7,9 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		actions: {
-			loadData: () => {
-				const store = getStore();
-				
+			loadData: () => {				
 				fetch("https://swapi.dev/api/people")
 				.then((res) => res.json())
 				.then((data) => {
@@ -30,9 +28,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then((data) => {
 					setStore({starships: data.results})
 				})
-				.catch((error) => {console.log(error)})
-
-				
+				.catch((error) => {console.log(error)})				
+			},
+			getCharacter: (idx) => {
+				const characters = getStore().characters;
+				return characters[idx];
+			},
+			getPlanet: (idx) => {
+				const planets = getStore().planets;
+				return planets[idx];
+			},
+			getStarship: (idx) => {
+				const starships = getStore().starships;
+				return starships[idx];
 			},
 		}
 	};

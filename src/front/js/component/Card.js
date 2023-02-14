@@ -4,55 +4,67 @@ import { Context } from "../store/appContext";
 
 const Card = (props) => {
     const {store, actions} = useContext(Context)
-    let typeURL = props.character ? "/components/character/" : "/components/planet/"
-    let name = ''
-    if (props.character){
-        name = props.character.name
-    }else if(props.planet) {
-        name = props.planet.name
-    } else {
-        name = props.starship
-    }
+    // let typeURL = props.character ? "/about/character/" : "/about/planet/"
+    // let name = null
+    // if (props.character){
+    //     name = props.character.name
+    // }else if(props.planet) {
+    //     name = props.planet.name
+    // } else {
+    //     name = props.starship
+    // }
 
     // make people data as a variable
-    let characterProps = props.character ? <div>
-            <img src={`https://starwars-visualguide.com/assets/img/characters/${props.id + 1}.jpg`} className="card-img-top"  style={{maxHeight: "300px", objectFit: "cover"}} alt="..." />
+    let characterProps = props.type == 'character' ? <div>
+            <img 
+                src={`https://starwars-visualguide.com/assets/img/characters/${props.id + 1}.jpg`} 
+                className="card-img-top"  
+                style={{maxHeight: "300px", objectFit: "cover"}} 
+                alt="..." 
+            />
             <div className="card-body">
-                <h5 className="card-title">{props.character.name}</h5> 
-                <h6>Gender: {props.character.gender}</h6> 
-                <h6>Hair color: {props.character.hair_color}</h6> 
-                <h6>Eye color: {props.character.eye_color}</h6>
+                <h5 className="card-title">{props.item.name}</h5> 
+                <h6>Gender: {props.item.gender}</h6> 
+                <h6>Hair color: {props.item.hair_color}</h6> 
+                <h6>Eye color: {props.item.eye_color}</h6>
             </div>
         </div> : ""
-    let planetProps = props.planet ? <div>
+    let planetProps = props.type == 'planet' ? <div>
             <img src={`https://starwars-visualguide.com/assets/img/planets/${props.id + 1}.jpg`} className="card-img-top" style={{maxHeight: "300px", objectFit: "cover"}} alt="..." />
             <div className="card-body">
-                <h5 className="card-title">{props.planet.name}</h5>
-                <h6>Diameter: {props.planet.diameter}</h6>
-                <h6>Population: {props.planet.population}</h6>
-                <h6>Terrain: {props.planet.terrain}</h6>
+                <h5 className="card-title">{props.item.name}</h5>
+                <h6>Diameter: {props.item.diameter}</h6>
+                <h6>Population: {props.item.population}</h6>
+                <h6>Terrain: {props.item.terrain}</h6>
             </div>
         </div> : ""
     
-    let starshipProps = props.starship ? <div>
-            <img src={`https://starwars-visualguide.com/assets/img/starships/${props.id + 1}.jpg`} className="card-img-top" style={{maxHeight: "300px", objectFit: "cover"}} alt="..." />
+    let starshipProps = props.type == 'starship' ? <div>
+            <img 
+                src={`https://starwars-visualguide.com/assets/img/starships/${props.id + 1}.jpg`} 
+                onError={(e) => {
+                    e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+                }}
+                className="card-img-top" 
+                style={{maxHeight: "300px", objectFit: "cover"}} 
+                alt="..." />
             <div className="card-body">
-                <h5 className="card-title" >{props.starship.name}</h5>
-                <h6>Cost: {props.starship.cost_in_credits}</h6>
-                <h6>Rating: {props.starship.hyperdrive_rating}</h6>
-                <h6>Model: {props.starship.model}</h6>
+                <h5 className="card-title" >{props.item.name}</h5>
+                <h6>Cost: {props.item.cost_in_credits}</h6>
+                <h6>Rating: {props.item.hyperdrive_rating}</h6>
+                <h6>Model: {props.item.model}</h6>
             </div>
     </div> : ""
 
 
     return (
         <div className="card" style={{"width": "18rem"}}>
-            {props.character ? characterProps : "" }
-            {props.planet ? planetProps : "" }
-            {props.starship ? starshipProps : ''}
+            {props.type == 'character' ? characterProps : "" }
+            {props.type == 'planet' ? planetProps : "" }
+            {props.type == 'starship' ? starshipProps : ''}
 
             <div className="d-flex" style={{justifyContent: 'space-between'}}>
-                <Link to={typeURL + props.id}>
+                <Link to={'/about/' + props.type +'/'+ props.id}>
                     <span className="btn btn-primary">Learn More</span>
                 </Link>
                 <button 
