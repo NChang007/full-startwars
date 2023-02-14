@@ -1,26 +1,53 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import Card from "../component/Card";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-
+	
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
+		<div
+		className=""
+		style={{
+			padding: "3rem",
+			display: "flex",
+			flexDirection:'column',
+			justifyContent: "center",
+			alignItems: "center",
+		}}
+		>
+			<h2>CHARACTERS</h2>
+			<div className="cardParent">
+				{store.characters.map((char, idx) => {
+				return (
+					<div className="cardMapDiv" key={idx}>
+						<Card character={char} id={idx}/>
+					</div>
+				);
+				})}
 			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
+			
+			<h2 className="planetsHeading">PLANETS</h2>
+			<div className="cardParent">
+				{store.planets.map((planet, idx) => {
+					return (
+					<div className="cardMapDiv" key={idx}>
+						<Card planet={planet} id={idx}/>
+					</div>
+				);
+				})}
+			</div>	
+
+			<h2 className="planetsHeading">STARSHIPS</h2>
+			<div className="cardParent">
+				{store.starships.map((starship, idx) => {
+					return (
+					<div className="cardMapDiv" key={idx}>
+						<Card starship={starship} id={idx}/>
+					</div>
+				);
+				})}
+			</div>	
 		</div>
 	);
 };
