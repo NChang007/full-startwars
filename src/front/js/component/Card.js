@@ -4,8 +4,6 @@ import { Context } from "../store/appContext";
 import FavoriteBtn from "./FavoriteBtn";
 
 const Card = (props) => {
-    const {store, actions} = useContext(Context)
-
     // make people data as a variable
     let characterProps = props.type == 'character' ? <div>
             <img 
@@ -60,12 +58,31 @@ const Card = (props) => {
             </div>
     </div> : ""
 
+    let createdProps = props.type == 'created' ? <div>
+            <img 
+                src={props.item.image}
+                onError={(e) => {
+                    e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+                }}
+                className="card-img-top"  
+                style={{maxHeight: "300px", objectFit: "cover"}} 
+                alt="Images of Star Wars Characters" 
+            />
+            <div className="card-body">
+                <h5 className="card-title">{props.item.name}</h5> 
+                <h6>Gender: {props.item.gender}</h6> 
+                <h6>Hair color: {props.item.hair_color}</h6> 
+                <h6>Eye color: {props.item.eye_color}</h6>
+            </div>
+    </div> : ""
+
 
     return (
         <div className="card" style={{"width": "18rem"}}>
-            {props.type == 'character' ? characterProps : "" }
-            {props.type == 'planet' ? planetProps : "" }
-            {props.type == 'starship' ? starshipProps : ''}
+            {props.type == 'character' ? characterProps : '' }
+            {props.type == 'planet' ? planetProps : '' }
+            {props.type == 'starship' ? starshipProps : '' }
+            {props.type == 'created' ? createdProps : '' }
 
             <div className="d-flex" style={{justifyContent: 'space-between'}}>
                 <Link to={'/about/' + props.type +'/'+ props.id}>

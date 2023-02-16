@@ -48,6 +48,17 @@ export const Home = () => {
 				);
 				})}
 			</div>	
+
+			<h2 className="planetsHeading">CREATED</h2>
+			<div className="cardParent">
+				{store.created.map((item, idx) => {
+					return (
+					<div className="cardMapDiv" key={idx}>
+						<Card item={item} id={idx} type="created" />
+					</div>
+				);
+				})}
+			</div>
 		</div>
 	);
 };

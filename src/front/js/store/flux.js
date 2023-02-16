@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			planets: [],
 			starships: [],
+			created: [],
 
 		},
 		actions: {
@@ -18,7 +19,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://swapi.dev/api/planets")
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data);
 					setStore({planets: data.results})
 				})
 				.catch((error) => {console.log(error)})
@@ -28,7 +28,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then((data) => {
 					setStore({starships: data.results})
 				})
-				.catch((error) => {console.log(error)})				
+				.catch((error) => {console.log(error)})	
+				
+				fetch("https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/characters")
+				.then((res) => res.json())
+				.then((data) => {
+					setStore({created: data.data})
+				})
+				.catch((error) => {console.log(error)})	
 			},
 			getCharacter: (idx) => {
 				const characters = getStore().characters;
@@ -41,6 +48,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getStarship: (idx) => {
 				const starships = getStore().starships;
 				return starships[idx];
+			},
+			getCreated: (idx) => {
+				const created = getStore().created;
+				return created[idx];
 			},
 		}
 	};
