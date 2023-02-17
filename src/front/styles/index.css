@@ -38,3 +38,68 @@
 .aboutDetails h4{
     margin: 1rem;
 }
+/* login page ------------------------------------------------------------------------------------*/
+.loginCont { 
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://wallpaperaccess.com/full/214962.jpg');
+    background-size: cover;
+}
+.loginForm {
+    backdrop-filter: blur(15px);
+    padding: 1rem;
+    border-radius: 15px;
+    color: white
+}
+.loginFormContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.input-field {
+    margin: 1rem;
+}
+.myInput  {
+    border-radius: 6px;
+    border: 1px solid white;
+    background-color: transparent;
+    text-align: center;
+    color: rgb(236, 61, 236);
+    
+}
+.myInput:focus{
+    border: 1px solid purple;
+}
+.myInput:focus-visible{
+    outline: none;
+}
+.link {
+    color: rgb(236, 61, 236);
+    text-decoration: none;
+}
+.link:hover {
+    color: purple;
+}
+.loginFormAction {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+}
+.formBtn {
+    border: none;
+    width: 100px;
+    border-radius: 5px;
+    background-color: rgb(236, 61, 236);
+    color: white;
+}
+.formBtn:hover {
+    background-color: purple;
+}
+.formBtn:focus-visible{
+    outline: none;
+}
