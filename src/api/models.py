@@ -53,3 +53,25 @@ class Characters(db.Model):
     
     def to_dict(self):
         return {}
+
+class Favorites(db.Model):
+    __tablename__ = 'Favorites'
+    id = db.Column(db.Integer, primary_key=True)
+    index = db.Column(db.Integer, nullable=False)
+    uid = db.Column(db.Integer, nullable=False)
+    type = db.Column(db.String(256))
+    item = db.Column(db.String(1000), unique=True, nullable=False)
+    #password = db.Column(db.String(256), unique=False, nullable=False)
+
+
+    def __repr__(self):
+        return f'<Favorite {self.item}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "index": self.index,
+            "uid": self.uid,
+            "type": self.type,
+            "item": self.item
+        }

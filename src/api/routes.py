@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Characters
+from api.models import db, User, Characters, Favorites
 from api.utils import generate_sitemap, APIException
 
 from flask_jwt_extended import create_access_token
@@ -85,3 +85,31 @@ def getOneCharacters(id):
     return jsonify(msg="This page does not exist")
   else:
     return jsonify(data=character.serialize())
+
+# add favorite
+@api.route('/favorites', methods=['POST'])
+@jwt_required()
+def addFavorite():
+  uid = get_jwt_identity()
+  request_body = request.get_json()
+  print(request_body)
+  favorite = Favorites(
+    uid = uid,
+    index = request_body['id'],
+    item = repr(request_body['item']),
+    type = request_body['type']
+  )
+  
+  db.session.add(favorite)   
+  db.session.commit()
+  # get favorites for logged user
+  favorites = getFavoritesByID(uid)
+  # return those favs - same happens in the delete function
+  return jsonify(favorites=favorites)
+
+def getFavoritesByID(uid):
+  favorites = Favorites.query.filter_by(uid=uid)
+  favorites = [favorite.serialize() for favorite in favorites]
+  print(favorites)
+  return jsonify(favorites=favorites)
+  

@@ -88,7 +88,7 @@ const Card = (props) => {
                 <Link to={'/about/' + props.type +'/'+ props.id}>
                     <span className="btn btn-primary">Learn More</span>
                 </Link>
-                <FavoriteBtn type={props.type} id={props.id} />
+                <FavoriteBtn type={props.type} id={props.id} item={props.item}/>
             </div>
         </div>
     )
