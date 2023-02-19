@@ -56,7 +56,7 @@ class Characters(db.Model):
 
 class Favorites(db.Model):
     __tablename__ = 'Favorites'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     index = db.Column(db.Integer, nullable=False)
     uid = db.Column(db.Integer, nullable=False)
     type = db.Column(db.String(256))
@@ -69,8 +69,8 @@ class Favorites(db.Model):
 
     def serialize(self):
         return {
-            "id": self.id,
-            "index": self.index,
+            #"id": self.id,
+            "id": self.index,
             "uid": self.uid,
             "type": self.type,
             "item": self.item

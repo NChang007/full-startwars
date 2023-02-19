@@ -5,7 +5,8 @@ import Card from '../component/Card';
 const Profile = () => {
     const { store, actions } = useContext(Context);
     let favorites = store.favorites
-    //console.log(favorites);
+   // console.warn(favorites);
+   // console.error("error")
     return (
         <div className='profileCont'>
             <h1 className='profileName'>user's name</h1>
@@ -13,9 +14,10 @@ const Profile = () => {
             <div>
                 { favorites.length > 0 &&
                     favorites.map((item, idx) => {
+                        //console.log(item);
                         return (
                             <div className="col-3" key={idx}>
-                                <Card item={item} id={item.id} type={item.type}/>
+                                <Card item={item.item} id={item.id} type={item.type}/>
                             </div>                            
                         )}
                     )  

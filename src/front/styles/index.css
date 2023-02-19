@@ -1,3 +1,11 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(./font/SfDistantGalaxy-0l3d.ttf);
+}
+body {
+    font-family: myFirstFont;
+}
+
 /* home-------------------------------------------------------------------------------------------- */
 .planetsHeading {
     border-top: 1px solid black;
@@ -38,7 +46,7 @@
 .aboutDetails h4{
     margin: 1rem;
 }
-/* login page ------------------------------------------------------------------------------------*/
+/* login page ------------------------------------------------------------------------------------ */
 .loginCont { 
     width: 100%;
     height: 100vh;

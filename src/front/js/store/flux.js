@@ -47,6 +47,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             console.log(error);
           });
+        
+        const token = sessionStorage.getItem("token");
+        if (token) {
+          const opts = {
+            headers: {
+              Authorization: "Bearer " + token
+            },
+           // method: "POST"
+          };
+          fetch(
+            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/getfavorites",
+            opts
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              setStore({ favorites: data.favorites });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       },
       getCharacter: (idx) => {
         const characters = getStore().characters;
@@ -102,7 +123,13 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           const data = await res.json();
           sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          data.favorites.forEach(f => {
+            //console.log(f);
+            f.item = f.item.replace(/'/g, '"');
+            //console.log(f);
+            f.item = JSON.parse(f.item)
+          })
+          setStore({ token: data.access_token, favorites: data.favorites });
           return true;
         } catch (error) {
           console.error(error);
@@ -150,12 +177,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       addFavorite: (item) => {
         let f = getStore().favorites;
         let t = getStore().token;
-        f.push(item);
         if (sessionStorage.getItem("token")) {
           const opts = {
             headers: {
               Authorization: "Bearer " + t,
-			  'Content-Type': 'application/json'
+			        'Content-Type': 'application/json'
             },
             method: "POST",
             body: JSON.stringify(item),
@@ -163,12 +189,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           fetch(
             "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/favorites",
             opts
-          )
+            )
             .then((response) => response.json())
             .then((data) => {
-              console.log(data);
-              //setStore({ favorites: data.favorites });
-              setStore({ favorites: f });
+              //console.log(data);
+              if(data.msg == "ok") {
+                f.push(item);
+                setStore({ favorites: f });
+              }
             })
             .catch((error) => {
               //error handling
@@ -178,13 +206,37 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       removeFavorite: (item) => {
         let f = getStore().favorites;
-        f.forEach((el, i) => {
-          if (el.id === item.id && el.type === item.type) {
-            f.splice(i, 1);
-          }
-        });
-        //console.log(f);
-        setStore({ favorites: f });
+        let t = getStore().token;
+        if (sessionStorage.getItem("token")) {
+          const opts = {
+            headers: {
+              Authorization: "Bearer " + t,
+			        'Content-Type': 'application/json'
+            },
+            method: "DELETE",
+            body: JSON.stringify(item),
+          };
+          fetch(
+            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/deletefav",
+            opts
+            )
+            .then((response) => response.json())
+            .then((data) => {
+              //console.log(data);
+              if(data.msg == "ok") {
+                f.forEach((el, i) => {
+                  if (el.id === item.id && el.type === item.type) {
+                    f.splice(i, 1);
+                  }
+                });
+                setStore({ favorites: f });
+              }
+            })
+            .catch((error) => {
+              //error handling
+              console.log(error);
+            });
+        }
       },
     },
   };
