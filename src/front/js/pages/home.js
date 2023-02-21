@@ -4,7 +4,15 @@ import Card from "../component/Card";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	
+	window.onload = () => {
+		const scrollContainer = document.querySelector(".cardParent");
+
+	scrollContainer.addEventListener("wheel", (evt) => {
+		evt.preventDefault();
+		scrollContainer.scrollLeft += evt.deltaY;
+	});
+	}
+
 	return (
 		<div
 		className="homeCont"
