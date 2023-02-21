@@ -37,7 +37,8 @@ def create_token():
       expiration = datetime.timedelta(days=3)
       access_token = create_access_token(identity= user.id, expires_delta= expiration)
       favorites = getFavoritesByID(user.id)
-      return jsonify(access_token=access_token, favorites=favorites)
+      user_name = user.name
+      return jsonify(access_token=access_token, favorites=favorites, user_name=user_name)
 
     return jsonify(msg="wrong user")
 

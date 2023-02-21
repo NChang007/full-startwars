@@ -9,7 +9,7 @@ const Profile = () => {
    // console.error("error")
     return (
         <div className='profileCont'>
-            <h1 className='profileName'>user's name</h1>
+            <h1 className='profileName'>{`Welcome back ${store.user_name}`}</h1>
             <h3>Your Favorites</h3>
             <div className='profileCardGrid'>
                 { favorites.length > 0 &&

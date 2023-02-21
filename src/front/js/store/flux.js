@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       created: [],
       token: null,
       favorites: [],
+      user_name: null,
     },
     actions: {
       loadData: () => {
@@ -129,7 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             //console.log(f);
             f.item = JSON.parse(f.item)
           })
-          setStore({ token: data.access_token, favorites: data.favorites });
+          setStore({ token: data.access_token, favorites: data.favorites, user_name: data.user_name });
           return true;
         } catch (error) {
           console.error(error);
