@@ -9,7 +9,7 @@ const FavoriteBtn = (props) => {
         }else {
           document.querySelector(`#favIcon${props.type}${props.id}`).classList = 'far fa-heart'
         }
-        console.log(props.item); 
+        // console.log(props.item); 
         let fav = {
           id: props.id,
           type: props.type,

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoimg from '../../img/logo.png'
+import DarkOrLight from "./darkOrLight";
 
 export const Navbar = () => {
 	return (
@@ -19,6 +20,7 @@ export const Navbar = () => {
 							style={{width: '40px'}}
 						/>
 					</Link>
+					<DarkOrLight />
 				</div>
 			</div>
 		</nav>

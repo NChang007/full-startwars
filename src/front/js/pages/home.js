@@ -7,7 +7,7 @@ export const Home = () => {
 	
 	return (
 		<div
-		className=""
+		className="homeCont"
 		style={{
 			padding: "3rem",
 			display: "flex",

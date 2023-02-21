@@ -6,16 +6,41 @@ body {
     font-family: myFirstFont;
 }
 
+:root {
+    --primary-color: white;
+    --text-color: black;
+    --card-parent-bg: #f5f5f5;
+    --card-bg: white;
+    --secondary-color: #101010;
+    --btn-bg:rgb(211, 154, 32);
+    --btn-bg-hover:rgb(158, 117, 27);
+}
+.dark-side {
+    --primary-color: #202020;
+    --text-color: white;
+    --card-parent-bg: #383838;
+    --card-bg: #282828;
+    --secondary-color: rgb(160, 25, 92);
+    --btn-bg:rgb(211, 98, 32);
+    --btn-bg-hover:rgb(156, 74, 27);
+}
+
 /* home-------------------------------------------------------------------------------------------- */
+.homeCont {
+    background: var(--primary-color);
+}
+.homeCont h2 {
+    color: var(--text-color)
+}
 .planetsHeading {
-    border-top: 1px solid black;
+    border-top: 1px solid var(--secondary-color);
 }
 .cardParent {
     width: 80%;
     /* height: 300px; */
     padding: 30px;
     overflow-x: scroll; /*must have*/
-    background: #f5f5f5;
+    background: var(--card-parent-bg);
     white-space: nowrap; /*must have*/
 }
 .cardMapDiv {
@@ -110,4 +135,25 @@ body {
 }
 .formBtn:focus-visible{
     outline: none;
+}
+/* profile page--------------------------------------- */
+.profileCont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* card componet ---------------------------------------------------------------------- */
+.card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+.btn {
+    background-color: var(--btn-bg);
+    border: var(--btn-bg);
+}
+.btn:hover {
+    background-color: var(--btn-bg-hover);
 }
