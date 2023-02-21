@@ -153,7 +153,7 @@ const About = () => {
     )
   }
 
-  return <div>{fields}</div>;
+  return <div className="displayAbout">{fields}</div>;
 };
 
 export default About;

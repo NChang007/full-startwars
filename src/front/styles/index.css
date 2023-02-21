@@ -33,7 +33,8 @@ body {
     color: var(--text-color)
 }
 .planetsHeading {
-    border-top: 1px solid var(--secondary-color);
+    border-bottom: 1px solid var(--secondary-color);
+    margin-top: 2rem;
 }
 .cardParent {
     width: 80%;
@@ -48,6 +49,11 @@ body {
     display: inline-block;
 }
 /* About page ---------------------------------------------------------------------------------------------- */
+.displayAbout {
+    height: 100vh;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
 .about {
     display: flex;
     justify-content: center;
@@ -66,7 +72,7 @@ body {
 }
 .aboutDetails{
     display: flex;
-    border-top: 2px solid rgb(172, 38, 172);
+    border-top: 2px solid var(--secondary-color);
 }
 .aboutDetails h4{
     margin: 1rem;
@@ -138,13 +144,21 @@ body {
 }
 /* profile page--------------------------------------- */
 .profileCont {
+    background-color: var(--primary-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    height: 100vh;
 }
-
-
+.profileCardGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    place-items: center;
+    gap: 20px;
+}
 /* card componet ---------------------------------------------------------------------- */
 .card {
     background-color: var(--card-bg);
@@ -156,4 +170,15 @@ body {
 }
 .btn:hover {
     background-color: var(--btn-bg-hover);
+}
+/* dark or light -------------------------------------------------------------------------------- */
+#darkLightIcon:hover {
+    cursor: pointer;
+}
+/*  footer ------------------------------------------------------------------------------------------- */
+.footer {
+    margin-top: 1rem;
+    border-top: 1px solid var(--secondary-color);
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }

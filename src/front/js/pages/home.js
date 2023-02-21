@@ -16,7 +16,7 @@ export const Home = () => {
 			alignItems: "center",
 		}}
 		>
-			<h2>CHARACTERS</h2>
+			<h2 className="planetsHeading" >CHARACTERS</h2>
 			<div className="cardParent">
 				{store.characters.map((item, idx) => {
 				return (

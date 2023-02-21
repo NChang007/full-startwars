@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoimg from '../../img/logo.png'
+import logoimg from '../../img/icons8-baby-yoda-150.png'
 import DarkOrLight from "./darkOrLight";
 
 export const Navbar = () => {
@@ -13,11 +13,11 @@ export const Navbar = () => {
 						style={{width: '100px', height: '35px'}}
 					/>
 				</Link>
-				<div className="ml-auto">
+				<div className="ml-auto d-flex">
 					<Link to="/login">
 						<img 
 							src={logoimg} 
-							style={{width: '40px'}}
+							style={{width: '50px'}}
 						/>
 					</Link>
 					<DarkOrLight />

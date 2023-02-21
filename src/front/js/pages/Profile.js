@@ -11,19 +11,23 @@ const Profile = () => {
         <div className='profileCont'>
             <h1 className='profileName'>user's name</h1>
             <h3>Your Favorites</h3>
-            <div>
+            <div className='profileCardGrid'>
                 { favorites.length > 0 &&
                     favorites.map((item, idx) => {
                         //console.log(item);
                         return (
-                            <div className="col-3" key={idx}>
+                            <div  key={idx}>
                                 <Card item={item.item} id={item.id} type={item.type}/>
                             </div>                            
                         )}
                     )  
                 }
             </div>
-            <button onClick={() => actions.logout()} className="btn btn-warning">
+            <button 
+                onClick={() => actions.logout()} 
+                className="btn btn-warning"
+                style={{margin: '3rem'}}
+            >
                 Log Out
             </button>
         </div>
