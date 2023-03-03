@@ -1,11 +1,13 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      token: null,
+      cf_url: 'https://3000-nchang007-fullstartwars-kwutb4wefk5.ws-us89.gitpod.io',
+      cb_url: 'https://3001-nchang007-fullstartwars-kwutb4wefk5.ws-us89.gitpod.io',
       characters: [],
       planets: [],
       starships: [],
       created: [],
-      token: null,
       favorites: [],
       user_name: null,
     },
@@ -38,9 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error);
           });
 
-        fetch(
-          "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/characters"
-        )
+        fetch(cb_url + "/api/characters")
           .then((res) => res.json())
           .then((data) => {
             setStore({ created: data.data });
@@ -48,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             console.log(error);
           });
-        
+        const cb_url = getStore().cb_url
+        //this is to update the favorites when the user logs in
         const token = sessionStorage.getItem("token");
         if (token) {
           const opts = {
@@ -57,10 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             },
            // method: "POST"
           };
-          fetch(
-            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/getfavorites",
-            opts
-          )
+          fetch(cb_url + "/api/getfavorites",opts)
             .then((res) => res.json())
             .then((data) => {
               setStore({ favorites: data.favorites });
@@ -94,13 +92,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
+        const cf_url = getStore().cf_url
         const token = sessionStorage.removeItem("token");
         setStore({ token: null });
-        window.location.href =
-          "https://3000-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/";
+        window.location.href = cf_url + "/";
       },
 
       login: async (email, password) => {
+        const cb_url = getStore().cb_url
         const opts = {
           method: "POST",
           mode: "cors",
@@ -114,10 +113,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         try {
-          const res = await fetch(
-            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/login",
-            opts
-          );
+          const res = await fetch(cb_url + "/api/login", opts);
           if (res.status !== 200) {
             alert("there has been an error");
             return false;
@@ -125,20 +121,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await res.json();
           sessionStorage.setItem("token", data.access_token);
           data.favorites.forEach(f => {
-            //console.log(f);
-            f.item = f.item.replace(/'/g, '"');
-            //console.log(f);
+            //was returning an error bc it didnt like the single quotes so the line below turns the single into double quotes 
+            f.item = f.item.replace(/'/g, '"')
             f.item = JSON.parse(f.item)
           })
           setStore({ token: data.access_token, favorites: data.favorites, user_name: data.user_name });
           return true;
-        } catch (error) {
-          console.error(error);
-        }
+        } catch (error) {console.error(error)}
       },
 
       createUser: async (name, email, password) => {
-        const store = getStore();
+        const cb_url = getStore().cb_url
+        const cf_url = getStore().cf_url
         const opts = {
           method: "POST",
           mode: "cors",
@@ -153,29 +147,23 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         try {
-          const res = await fetch(
-            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/createUser",
-            opts
-          );
+          const res = await fetch(cb_url + "/api/createUser", opts);
           if (res.status !== 200) {
             alert("there has been an error");
             return false;
           }
           const data = await res.json();
-          console.log(data);
+          // console.log(data);
           if (data.status == "true") {
-            //rederect to login
-            window.location.href =
-              "https://3000-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/login";
+            //redirect to login
+            window.location.href = cf_url + "/login" 
           }
-
           return true;
-        } catch (error) {
-          console.error(error);
-        }
+        } catch (error) {console.error(error);}
       },
 
       addFavorite: (item) => {
+        const cb_url = getStore().cb_url
         let f = getStore().favorites;
         let t = getStore().token;
         if (sessionStorage.getItem("token")) {
@@ -187,25 +175,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             method: "POST",
             body: JSON.stringify(item),
           };
-          fetch(
-            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/favorites",
-            opts
-            )
+          fetch(cb_url + "/api/favorites", opts)
             .then((response) => response.json())
             .then((data) => {
-              //console.log(data);
               if(data.msg == "ok") {
                 f.push(item);
                 setStore({ favorites: f });
               }
             })
-            .catch((error) => {
-              //error handling
-              console.log(error);
-            });
+            .catch((error) => {console.log(error);});
         }
       },
       removeFavorite: (item) => {
+        const cb_url = getStore().cb_url
         let f = getStore().favorites;
         let t = getStore().token;
         if (sessionStorage.getItem("token")) {
@@ -217,13 +199,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             method: "DELETE",
             body: JSON.stringify(item),
           };
-          fetch(
-            "https://3001-nchang007-fullstartwars-4pcoc5dy9za.ws-us87.gitpod.io/api/deletefav",
-            opts
-            )
+          fetch(cb_url + "/api/deletefav", opts)
             .then((response) => response.json())
             .then((data) => {
-              //console.log(data);
               if(data.msg == "ok") {
                 f.forEach((el, i) => {
                   if (el.id === item.id && el.type === item.type) {
@@ -233,12 +211,12 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({ favorites: f });
               }
             })
-            .catch((error) => {
-              //error handling
-              console.log(error);
-            });
+            .catch((error) => {console.log(error);});
         }
       },
+
+
+
     },
   };
 };

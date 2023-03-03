@@ -57,7 +57,7 @@ def createUser():
 
     user = User.query.filter_by(email=request_body["email"]).first()
     if user:
-      return jsonify({"msg": "Username  already exists"}), 400
+      return jsonify({"msg": "User already exists"}), 400
 
     user = User(
           name = request_body["name"],

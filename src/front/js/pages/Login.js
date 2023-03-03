@@ -17,7 +17,7 @@ const Login = () => {
     }
     useEffect(() => {
         if (store.token) navigate("/profile")
-    })
+    },[])
   
     return (
       <div className="loginCont">
